@@ -43,3 +43,11 @@ Run the tests contained in the `test` directory and you should get the following
 7.280109889280518 # For trajectories with different length
 2.8284271247461903 # For trajectories with same length
 ```
+
+## Directory structure
+
+    .
+    ├── build                   # Compiled files (not included in GitHub)
+    ├── examples                # More elaborated examples
+    ├── src                     # C++ source code
+    └── tests                   # Tests (C++/Python) to ensure expected outcomes
