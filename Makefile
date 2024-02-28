@@ -2,7 +2,10 @@ CC = g++
 CFLAGS = -fPIC -Wall
 LDFLAGS = -shared
 
-all: build/libeuclidean.so
+all: build build/libeuclidean.so
+
+build:
+	makedir -p build
 
 build/libeuclidean.so: build/euclidean.o
 	$(CC) $(LDFLAGS) -o $@ build/euclidean.o
