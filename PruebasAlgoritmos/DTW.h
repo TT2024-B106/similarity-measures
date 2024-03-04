@@ -88,7 +88,7 @@ private:
 		double cost = 0.0;
 
 		for (const auto& index : optimalPath) {
-			std::cout << "(" << index.first << ", " << index.second << ") ";
+			//std::cout << "(" << index.first << ", " << index.second << ") ";
 			cost += accumulatedCost[index.first][index.second];
 		}
 
