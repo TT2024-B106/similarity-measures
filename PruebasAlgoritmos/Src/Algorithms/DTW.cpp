@@ -1,11 +1,7 @@
-#pragma once
-#include <iostream>
-#include "Algoritmos.h"
+#include "../../Headers/DTW.h"
 
-class DTW : public Algoritmos
-{
-public:
-	double Execute(const CoordinateSequence& seq1, const CoordinateSequence& seq2)
+
+	double DTW::Execute(const CoordinateSequence& seq1, const CoordinateSequence& seq2)
 	{
 		std::vector<std::vector<double>> matrizCostos = CalculateDTWMatrix(seq1, seq2);
 		std::vector<std::pair<int, int>> rutaOptima = CalculateOptimalPath(matrizCostos);
@@ -15,8 +11,7 @@ public:
 	}
 
 
-private:
-	std::vector<std::vector<double>> CalculateDTWMatrix(const CoordinateSequence& seq1, const CoordinateSequence& seq2) {
+	std::vector<std::vector<double>> DTW::CalculateDTWMatrix(const CoordinateSequence& seq1, const CoordinateSequence& seq2) {
 		int m = seq1.points.size();
 		int n = seq2.points.size();
 		std::vector<std::vector<double>> accumulatedCost(m, std::vector<double>(n, 0.0));
@@ -49,8 +44,8 @@ private:
 
 		return accumulatedCost;
 	}
-private:
-	std::vector<std::pair<int, int>> CalculateOptimalPath(const std::vector<std::vector<double>>& accumulatedCost) {
+
+	std::vector<std::pair<int, int>> DTW::CalculateOptimalPath(const std::vector<std::vector<double>>& accumulatedCost) {
 		std::vector<std::pair<int, int>> optimalPath;
 
 		int i = accumulatedCost.size() - 1;
@@ -83,8 +78,8 @@ private:
 
 		return optimalPath;
 	}
-private:
-	double CalculateCostFromOptimalPath(const std::vector<std::vector<double>>& accumulatedCost, const std::vector<std::pair<int, int>>& optimalPath) {
+	
+	double DTW::CalculateCostFromOptimalPath(const std::vector<std::vector<double>>& accumulatedCost, const std::vector<std::pair<int, int>>& optimalPath) {
 		double cost = 0.0;
 
 		for (const auto& index : optimalPath) {
@@ -96,5 +91,3 @@ private:
 
 		return cost;
 	}
-};
-

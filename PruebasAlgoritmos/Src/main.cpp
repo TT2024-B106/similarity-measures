@@ -5,9 +5,10 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
-#include "coordinates.h"
-#include "Algoritmos.h"
-#include "DTW.h"
+#include "../Headers/coordinates.h"
+#include "../Headers/Algoritmos.h"
+#include "../Headers/DTW.h"
+#include "../Headers/Hausdorff.h"
 
 using namespace rapidjson;
 using namespace std;
@@ -24,10 +25,10 @@ int main() {
 	
 
 	Algoritmos* strategy = new DTW();
+	Algoritmos* strategy2 = new Hausdorff();
 
-	double result = strategy->Execute(sequence1, sequence2);
-	
-	delete strategy;
+	double result = strategy2->Execute(sequence1, sequence2);
+	delete strategy2;
 
 
 
