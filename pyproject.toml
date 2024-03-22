@@ -1,0 +1,23 @@
+# TODO: Select proper backend (https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend)
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "similarity_measures_b106"
+version = "0.0.1"
+authors = [
+  { name="Eduardo Mendoza" },
+]
+description = "Deployment packaging test for future py-cpp package"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/TT2024-B106/similarity-measures"
+Issues = "https://github.com/TT2024-B106/similarity-measures/issues"
