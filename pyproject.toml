@@ -1,11 +1,14 @@
 # TODO: Select proper backend (https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend)
 [build-system]
-requires = ["hatchling"]
+requires = [
+	"hatchling",
+	"versioningit",
+]
 build-backend = "hatchling.build"
 
 [project]
 name = "similarity_measures_b106"
-version = "0.0.5"
+dynamic = ["version"]
 authors = [
   { name="Eduardo Mendoza" },
 ]
@@ -21,3 +24,12 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/TT2024-B106/similarity-measures"
 Issues = "https://github.com/TT2024-B106/similarity-measures/issues"
+
+[tool.hatch.version]
+source = "versioningit"
+default-version = "0.0.0+unknown"
+
+[tool.hatch.version.format]
+distance = "{next_version}.dev{distance}+{vcs}{rev}"
+dirty = "{version}+dirty"
+distance-dirty = "{next_version}.dev{distance}+{vcs}{rev}.dirty"
