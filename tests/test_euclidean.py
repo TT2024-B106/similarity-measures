@@ -1,7 +1,7 @@
 import cppyy
 
 cppyy.include('src/euclidean.h')
-cppyy.load_library('build/libeuclidean.so')
+cppyy.load_library('libeuclidean.so')
 lib = cppyy.gbl
 
 def distance(p: list[float], q: list[float]) -> float:
