@@ -7,7 +7,7 @@ requires = [
 build-backend = "hatchling.build"
 
 [project]
-name = "similarity_measures_b106"
+name = "lumache"
 dynamic = ["version"]
 authors = [
   { name="Eduardo Mendoza" },
