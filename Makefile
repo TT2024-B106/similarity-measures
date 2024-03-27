@@ -5,7 +5,7 @@ LDFLAGS = -shared
 all: libeuclidean.so
 
 libeuclidean.so:
-	$(CC) $(CFLAGS) $(LDFLAGS) -o libeuclidean.so src/euclidean.cpp
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/euclidean.cpp
 
 clean:
 	rm -f ./*.so
