@@ -5,4 +5,5 @@ API
    :toctree: generated
 
    example
+   euclidean
 
