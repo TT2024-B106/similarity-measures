@@ -39,7 +39,9 @@ lib = cppyy.gbl # To shorten library calls, i.e.: lib.your_function()
 ## Directory structure
 
     .
-    ├── build                   # Compiled files (not included in GitHub)
-    ├── examples                # More elaborated examples
+    ├── .github/workflows       # Github Actions
+    ├── docs                    # Sphinx documentation generator directory
+    ├── examples                # Jupyter notebooks that show functionalities
+    ├── similarity_measures_b106# The python test module (library)
     ├── src                     # C++ source code
     └── tests                   # Tests (C++/Python) to ensure expected outcomes
