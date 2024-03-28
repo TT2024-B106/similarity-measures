@@ -1,8 +1,7 @@
-import sys
 import cppyy
 
 cppyy.include('src/euclidean.h')
-cppyy.load_library('build/libeuclidean.so')
+cppyy.load_library('libeuclidean.so')
 lib = cppyy.gbl
 
 def distance(p: list[float], q: list[float]) -> float:
@@ -31,14 +30,8 @@ def distance(p: list[float], q: list[float]) -> float:
 
     return lib.distance(p, q)
 
-if __name__ == '__main__':
-    # Different length
-    # Distance of:
-    # t1 = [(t1x_1, t1y_1)]
-    # t2 = [(t2x_1, t2y_1), [(t2x_2), (t2y_2)]
-    print(distance([1,2], [3,4,3,6]))
+def test_vectors_different_length():
+    assert distance([1,2], [3,4,3,6]) == 7.280109889280518
 
-    # Same length
-    print(distance([1,2], [3,4]))
-
-    sys.exit(0)
+def test_vectors_same_length():
+    assert distance([1,2], [3,4]) == 2.8284271247461903
