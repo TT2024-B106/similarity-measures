@@ -1,6 +1,10 @@
 import pathlib
 import sys
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
+
+project_root = pathlib.Path(__file__).parents[2].resolve()
+library_dir = project_root / "similarity_measures_b106"
+
+sys.path.insert(0, str(library_dir))
 
 # Configuration file for the Sphinx documentation builder.
 
@@ -8,7 +12,7 @@ sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 
 project = 'Similarity Measures'
 copyright = '2024, TT2024-B106'
-author = 'Graziella'
+author = 'TT2024-B106'
 
 # TODO: versioningit?
 release = '0.1'
