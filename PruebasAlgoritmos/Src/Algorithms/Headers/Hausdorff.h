@@ -3,7 +3,7 @@
 #include "Algoritmos.h"
 
 
-class Hausdorff : public Algoritmos
+class Hausdorff : public Algoritmo
 {
 public:
 	double Execute(const CoordinateSequence& seq1, const CoordinateSequence& seq2);

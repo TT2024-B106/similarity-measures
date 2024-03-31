@@ -1,5 +1,5 @@
 #include <vector>
-#include "../../Headers/Hausdorff.h"
+#include "Headers/Hausdorff.h"
 #include <iostream>
 #include <vector>
 #include <cmath>

@@ -35,7 +35,10 @@
 
 #C++
 PruebasAlgoritmos/x64/
-
+PruebasAlgoritmos/PruebasAlgoritmos.vcxproj
+PruebasAlgoritmos/PruebasAlgoritmos.vcxproj.filters
+PruebasAlgoritmos/PruebasAlgoritmos.vcxproj.user
+PruebasAlgoritmos/.vs
 # py gitignore
 
 # Byte-compiled / optimized / DLL files

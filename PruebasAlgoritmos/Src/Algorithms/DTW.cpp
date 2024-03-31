@@ -1,4 +1,4 @@
-#include "../../Headers/DTW.h"
+#include "Headers/DTW.h"
 
 
 	double DTW::Execute(const CoordinateSequence& seq1, const CoordinateSequence& seq2)

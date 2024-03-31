@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Algoritmos.h"
 
-class DTW : public Algoritmos
+class DTW : public Algoritmo
 {
 public:
 	double Execute(const CoordinateSequence& seq1, const CoordinateSequence& seq2);
