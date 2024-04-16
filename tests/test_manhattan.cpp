@@ -12,9 +12,11 @@
 */
 
 int main() {
-	// Sample arrays
-	std::vector<double> p = {1.0, 2.0}; // (x_1, y_1)
-	std::vector<double> q = {3.0, 4.0}; // (x_2, y_2)
+	// std::vector<double> p = {1.0, 2.0}; // (x_1, y_1)
+	// std::vector<double> q = {3.0, 4.0}; // (x_2, y_2)
+
+	std::vector<double> p = {1.4231, 2.123}; // (x_1, y_1)
+	std::vector<double> q = {10.213, 11.123}; // (x_2, y_2)
 
 	double res = distance(p, q);
 	if (res >= 0.0) {
