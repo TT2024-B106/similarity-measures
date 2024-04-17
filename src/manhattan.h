@@ -1,9 +1,9 @@
-#ifndef DISTANCE_H
-#define DISTANCE_H
+#ifndef MANHATTAN_H
+#define MANHATTAN_H
 
 #include <vector>
 #include <stdexcept>
 
 double manhattan_distance(const std::vector<double>& p, const std::vector<double>& q);
 
-#endif  // DISTANCE_H
+#endif  // MANHATTAN_H
