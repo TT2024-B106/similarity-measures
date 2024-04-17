@@ -1,7 +1,7 @@
 #include "manhattan.h"
 
 // Function to calculate Manhattan distance between two points
-double distance(
+double manhattan_distance(
 	const std::vector<double>& p, const std::vector<double>& q
 )
 {

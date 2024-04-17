@@ -4,6 +4,6 @@
 #include <vector>
 #include <stdexcept>
 
-double distance(const std::vector<double>& p, const std::vector<double>& q);
+double manhattan_distance(const std::vector<double>& p, const std::vector<double>& q);
 
 #endif  // DISTANCE_H
