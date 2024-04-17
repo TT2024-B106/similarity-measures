@@ -18,7 +18,7 @@ int main() {
 	std::vector<double> p = {1.4231, 2.123}; // (x_1, y_1)
 	std::vector<double> q = {10.213, 11.123}; // (x_2, y_2)
 
-	double res = distance(p, q);
+	double res = manhattan_distance(p, q);
 	if (res >= 0.0) {
 		std::cout << "Manhattan Distance: " << res << std::endl;
 	}
