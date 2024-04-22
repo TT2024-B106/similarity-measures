@@ -6,7 +6,7 @@ LDFLAGS = -shared
 BFLAGS = -L./build
 SFLAGS = -Wl,-rpath,./build
 
-all: libeuclidean.so libmanhattan.so libeditdist.so
+all: libeuclidean.so libmanhattan.so
 
 test-edr: libeditdist.so libmanhattan.so
 	mkdir -p build
