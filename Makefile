@@ -6,13 +6,13 @@ LDFLAGS = -shared
 BFLAGS = -L./build
 SFLAGS = -Wl,-rpath,./build
 
-all: libeuclidean.so libmanhattan.so libeditdist.so
+all: libeuclidean.so libmanhattan.so
 
 test-edr: libeditdist.so libmanhattan.so
 	mkdir -p build
 	mv libeditdist.so build/
 	mv libmanhattan.so build/ 
-	$(CC) tests/test_edr.cpp $(BFLAGS) -leditdist -lmanhattan $(SFLAGS) -o $@.out
+	g++ tests/test_edr.cpp $(BFLAGS) -leditdist -lmanhattan $(SFLAGS) -o $@.out
 
 	./$@.out -d
 
