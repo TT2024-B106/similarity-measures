@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 Having done this now you can import `cppyy` into your code:
 
-```sh
+```python
 import cppyy
 cppyy.include('src/your_header_file.h') # Enables calls
 cppyy.load_library('your_dynamic_lib.so') # Executes calls

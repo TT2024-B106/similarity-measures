@@ -34,4 +34,5 @@ jobs:
         make
     - name: Test with pytest
       run: |
-        pytest
+        # pytest-ing file by file
+        find tests/ -name "*.py" -exec pytest {} \;
