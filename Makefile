@@ -12,7 +12,7 @@ test-edr: libeditdist.so libmanhattan.so
 	mkdir -p build
 	mv libeditdist.so build/
 	mv libmanhattan.so build/ 
-	g++ tests/test_edr.cpp $(BFLAGS) -leditdist -lmanhattan $(SFLAGS) -o $@.out
+	$(CC) tests/test_edr.cpp $(BFLAGS) -leditdist -lmanhattan $(SFLAGS) -o $@.out
 
 	./$@.out -d
 
