@@ -6,8 +6,7 @@ double manhattan_distance(double a, double b) {
 
 double manhattan_distance(
 	const std::vector<double>& p, const std::vector<double>& q
-)
-{
+){
 	if (p.size() != q.size()) {
 		throw std::invalid_argument("Points must have the same dimensionality");
 	}
