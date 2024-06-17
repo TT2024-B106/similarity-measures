@@ -1,4 +1,3 @@
-import os
 import cppyy
 
 # Añadir la carpeta build al PATH
