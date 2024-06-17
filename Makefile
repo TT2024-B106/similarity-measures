@@ -33,6 +33,9 @@ libeuclidean.so:
 libmanhattan.so:
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/manhattan.cpp
 
+libeditdist.so:
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/edit_distance.cpp
+
 libdtw.so:
 	$(CC) $(CFLAGS) -std=c++20 $(LDFLAGS) -o $@ src/DTW.cpp src/Algoritmo.cpp
 
