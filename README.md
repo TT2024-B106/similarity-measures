@@ -8,11 +8,10 @@ For building the C++ libraries that the `src` directory will contain the `Makefi
 make
 ```
 
-Notice that this should compile an object file and then link this to a dynamic library that will be used by the Python library `cppyy`.
+Notice that this should create the dynamic library that will be used by the Python library `cppyy`.
 
 ```sh
-g++ -fPIC -Wall <C++ file> -o <Object file> # Compiles object file
-g++ -shared -o <Dynamic library> <Object file> # Links dynamic library
+g++ -fPIC -Wall -o <Dynamic library with .so extension> <C++ file>
 ```
 
 `make clean` will clean compiled files.
@@ -28,26 +27,21 @@ pip install -r requirements.txt
 
 Having done this now you can import `cppyy` into your code:
 
-```sh
+```python
 import cppyy
 cppyy.include('src/your_header_file.h') # Enables calls
-cppyy.load_library('build/your_dynamic_lib.so') # Executes calls
+cppyy.load_library('your_dynamic_lib.so') # Executes calls
 lib = cppyy.gbl # To shorten library calls, i.e.: lib.your_function()
 ```
 
-## Tests
-
-Run the tests contained in the `test` directory and you should get the following output if everything was set up correctly:
-
-```sh
-7.280109889280518 # For trajectories with different length
-2.8284271247461903 # For trajectories with same length
-```
+> `cppyy` will meant to be used only for testing!
 
 ## Directory structure
 
     .
-    ├── build                   # Compiled files (not included in GitHub)
-    ├── examples                # More elaborated examples
+    ├── .github/workflows       # Github Actions
+    ├── docs                    # Sphinx documentation generator directory
+    ├── examples                # Jupyter notebooks that show functionalities
+    ├── similarity_measures_b106# The python test module (library)
     ├── src                     # C++ source code
     └── tests                   # Tests (C++/Python) to ensure expected outcomes

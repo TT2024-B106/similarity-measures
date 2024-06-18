@@ -1,22 +1,35 @@
 CC = g++
+
 CFLAGS = -fPIC -Wall
 LDFLAGS = -shared
 
-all: build ctypes
+BFLAGS = -L./build
+SFLAGS = -Wl,-rpath,./build
 
-build:
-	makedir -p build
+all: libeuclidean.so libmanhattan.so
+
+test-edr: libeditdist.so libmanhattan.so
+	mkdir -p build
+	mv libeditdist.so build/
+	mv libmanhattan.so build/ 
+	g++ tests/test_edr.cpp $(BFLAGS) -leditdist -lmanhattan $(SFLAGS) -o $@.out
+
+	./$@.out -d
 
 ctypes:
-	$(CC) $(CFLAGS) $(LDFLAGS) -o build/libeuclidean.so src/euclidean.cpp
+	$(CC) $(CFLAGS) $(LDFLAGS) -o libeuclidean.so src/euclidean.cpp
 
-cppyy: build/libeuclidean.so
+cppyy: libeuclidean.so
 
-build/libeuclidean.so: build/euclidean.o
-	$(CC) $(LDFLAGS) -o $@ build/euclidean.o
+libeuclidean.so:
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/euclidean.cpp
 
-build/euclidean.o: src/euclidean.cpp src/euclidean.h
-	$(CC) $(CFLAGS) -c src/euclidean.cpp -o $@
+libmanhattan.so:
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/manhattan.cpp
+
+libeditdist.so:
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/edit_distance.cpp
 
 clean:
-	rm -f build/*
+	rm -f ./*.so
+	rm -f ./*.out
