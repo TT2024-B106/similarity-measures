@@ -18,6 +18,15 @@ test-edr: libeditdist.so libmanhattan.so
 
 	rm $@.out build/*.so
 
+test-lcss: liblcss.so
+	mkdir -p build
+	mv libeditdist.so build/
+	g++ tests/test_edr.cpp $(BFLAGS) -llcss $(SFLAGS) -o $@.out
+
+	./$@.out -d
+
+	rm $@.out build/*.so
+
 libeuclidean.so:
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/euclidean.cpp
 
@@ -26,6 +35,9 @@ libmanhattan.so:
 
 libeditdist.so:
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/edit_distance.cpp
+
+liblcss.so:
+	$(CC) $(CFLAGS) -std=c++20 $(LDFLAGS) -o $@ src/LCSS.cpp src/Algoritmo.cpp
 
 clean:
 	rm -f ./*.so
