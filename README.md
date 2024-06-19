@@ -1,14 +1,20 @@
 # Algorithms for trajectory similarity measures
-This repo contains some algorithms retrieved from literature and implemented in C++ and Python, with the idea of performing analysis and benchmarking in order to help us gain insights to build a Python library that will work with trajectories (in GeoJSON format) to mainly find similarity measures between them.
+This repo contains some algorithms retrieved from literature and implemented
+in C++ and Python, with the idea of performing analysis and benchmarking in
+order to help us gain insights to build a Python library that will work with
+trajectories (in GeoJSON format) to mainly find similarity measures between
+them.
 
 ## Usage
-For building the C++ libraries that the `src` directory will contain the `Makefile` needs to be modified and executed:
+For building the C++ libraries that the `src` directory will contain the
+`Makefile` needs to be modified and executed:
 
 ```
 make
 ```
 
-Notice that this should create the dynamic library that will be used by the Python library `cppyy`.
+Notice that this should create the dynamic library that will be used by the
+Python library `cppyy`.
 
 ```sh
 g++ -fPIC -Wall -o <Dynamic library with .so extension> <C++ file>
@@ -43,7 +49,8 @@ Install `requirements-jupyter.txt` dependencies:
 pip install -r requirements-jupyter.txt
 ```
 
-This will contain `requirements.txt` dependencies. Make sure to match same dependencies versions! In order not to get versions conflicts.
+This will contain `requirements.txt` dependencies. Make sure to match same
+dependencies versions! In order not to get versions conflicts.
 
 #### Hosting jupytter lab
 In order to view, modify or work with the notebooks you only need to run:
