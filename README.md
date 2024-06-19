@@ -52,7 +52,7 @@ pip install -r requirements-jupyter.txt
 This will contain `requirements.txt` dependencies. Make sure to match same
 dependencies versions! In order not to get versions conflicts.
 
-#### Hosting jupytter lab
+#### Hosting jupyter lab
 In order to view, modify or work with the notebooks you only need to run:
 
 ```sh
