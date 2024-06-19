@@ -63,10 +63,13 @@ This will open the jupyter host in your default browser.
 
 ## Directory structure
 
+Below find the proposed structure for this repository:
+
     .
     ├── .github/workflows       # Github Actions
     ├── docs                    # Sphinx documentation generator directory
-    ├── examples                # Jupyter notebooks that show functionalities
+    ├── examples                # Some useful examples
+    ├── notebooks               # Jupyter notebooks
     ├── similarity_measures_b106# The python test module (library)
     ├── src                     # C++ source code
     └── tests                   # Tests (C++/Python) to ensure expected outcomes
