@@ -1,0 +1,28 @@
+{
+    "id": {"$oid": "exid1"},
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "exftnm1",
+                "tiempo": "exfttm1",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[1, 2]]
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "exftnm2",
+                "tiempo": "exfttm2",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[3, 4]]
+                }
+            }
+        }
+    ]
+}
