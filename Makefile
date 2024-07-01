@@ -16,7 +16,10 @@ test-edr: libeditdist.so libmanhattan.so
 
 	./$@.out -d
 
-	rm $@.out build/*.so
+ctypes:
+	$(CC) $(CFLAGS) $(LDFLAGS) -o libeuclidean.so src/euclidean.cpp
+
+cppyy: libeuclidean.so
 
 libeuclidean.so:
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/euclidean.cpp

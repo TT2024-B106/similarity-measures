@@ -35,4 +35,5 @@ jobs:
     - name: Test with pytest
       run: |
         # pytest-ing file by file
+        # TODO: Fix this, success even when tests fail
         find tests/ -name "*.py" -exec pytest {} \;
