@@ -1,14 +1,20 @@
 # Algorithms for trajectory similarity measures
-This repo contains some algorithms retrieved from literature and implemented in C++ and Python, with the idea of performing analysis and benchmarking in order to help us gain insights to build a Python library that will work with trajectories (in GeoJSON format) to mainly find similarity measures between them.
+This repo contains some algorithms retrieved from literature and implemented
+in C++ and Python, with the idea of performing analysis and benchmarking in
+order to help us gain insights to build a Python library that will work with
+trajectories (in GeoJSON format) to mainly find similarity measures between
+them.
 
 ## Usage
-For building the C++ libraries that the `src` directory will contain the `Makefile` needs to be modified and executed:
+For building the C++ libraries that the `src` directory will contain the
+`Makefile` needs to be modified and executed:
 
 ```
 make
 ```
 
-Notice that this should create the dynamic library that will be used by the Python library `cppyy`.
+Notice that this should create the dynamic library that will be used by the
+Python library `cppyy`.
 
 ```sh
 g++ -fPIC -Wall -o <Dynamic library with .so extension> <C++ file>
@@ -36,12 +42,34 @@ lib = cppyy.gbl # To shorten library calls, i.e.: lib.your_function()
 
 > `cppyy` will meant to be used only for testing!
 
+### Jupyter notebooks
+Install `requirements-jupyter.txt` dependencies:
+
+```sh
+pip install -r requirements-jupyter.txt
+```
+
+This will contain `requirements.txt` dependencies. Make sure to match same
+dependencies versions! In order not to get versions conflicts.
+
+#### Hosting jupyter lab
+In order to view, modify or work with the notebooks you only need to run:
+
+```sh
+jupyter lab
+```
+
+This will open the jupyter host in your default browser.
+
 ## Directory structure
+
+Below find the proposed structure for this repository:
 
     .
     ├── .github/workflows       # Github Actions
     ├── docs                    # Sphinx documentation generator directory
-    ├── examples                # Jupyter notebooks that show functionalities
+    ├── examples                # Some useful examples
+    ├── notebooks               # Jupyter notebooks
     ├── similarity_measures_b106# The python test module (library)
     ├── src                     # C++ source code
     └── tests                   # Tests (C++/Python) to ensure expected outcomes
