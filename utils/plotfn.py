@@ -7,7 +7,10 @@ calculations functions.
 import timeit
 import matplotlib.pyplot as plt
 
-from collections.abc import Callable
+from pyspark.sql.session import SparkSession
+from pyspark.sql.dataframe import DataFrame
+
+# from collections.abc import Callable
 # from typing_extensions import ParamSpec
 #
 # _P = ParamSpec('_P')
@@ -16,9 +19,9 @@ from collections.abc import Callable
 
 def time_complexity3(
         # function: Callable[_P, _R],
-        function: any,
+        function,
         # populate_fn: Callable[_P, _R],
-        populate_fn: any,
+        populate_fn,
         plot_title: str,
         max_input_size_step: int | None = None,
         max_input_size_2: int | None = None,
@@ -42,7 +45,7 @@ def time_complexity3(
     else:
         sizes = [max_input_size + (max_input_size_step * i) for i in range(3)]
 
-    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    _, axs = plt.subplots(1, 3, figsize=(15, 5))
 
     for i, max_size in enumerate(sizes):
         times = []
@@ -66,5 +69,36 @@ def time_complexity3(
     plt.tight_layout()
     plt.show()
 
-def test():
-    print("Testing")
+def time_complexity3(
+        function,
+        populate_fn,
+        spark: SparkSession,
+        plot_title: str,
+        max_input_size = 1000,
+        max_input_step = 1000
+    ) -> None:
+    sizes = [max_input_size + (max_input_step * i) for i in range(3)]
+    _, axs = plt.subplots(1, 3, figsize=(15, 5))
+
+    for i, max_size in enumerate(sizes):
+        times = []
+
+        for size in range(1, max_size + 1):
+            geojson = populate_fn(size)
+            df: DataFrame = spark.createDataFrame(geojson['coordinates'])
+
+            # TODO: Measure time complexity of distance function
+            start = timeit.default_timer()
+            # TODO:
+            end = timeit.default_timer() - start
+
+            times.append(end)
+
+        axs[i].plot(times)
+        axs[i].set_title(f"{plot_title} (input size: {max_size})")
+        axs[i].set_xlabel("Input size")
+        axs[i].set_ylabel("Time")
+
+    plt.tight_layout()
+    plt.show()
+
