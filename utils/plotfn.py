@@ -7,7 +7,7 @@ calculations functions.
 import timeit
 import matplotlib.pyplot as plt
 
-from collections.abc import Callable
+# from collections.abc import Callable
 # from typing_extensions import ParamSpec
 #
 # _P = ParamSpec('_P')
