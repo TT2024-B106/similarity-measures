@@ -69,8 +69,8 @@ def time_complexity3(
     plt.tight_layout()
     plt.show()
 
-def time_complexity3(
-        function,
+def time_complexity3_spark(
+        # function,
         populate_fn,
         spark: SparkSession,
         plot_title: str,
@@ -86,6 +86,7 @@ def time_complexity3(
         for size in range(1, max_size + 1):
             geojson = populate_fn(size)
             df: DataFrame = spark.createDataFrame(geojson['coordinates'])
+            print(df)
 
             # TODO: Measure time complexity of distance function
             start = timeit.default_timer()
@@ -101,4 +102,3 @@ def time_complexity3(
 
     plt.tight_layout()
     plt.show()
-
