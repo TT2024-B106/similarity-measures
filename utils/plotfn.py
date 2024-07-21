@@ -6,7 +6,9 @@ calculations functions.
 
 import timeit
 import matplotlib.pyplot as plt
+import pyspark.sql.functions as F
 
+from matplotlib.axes import Axes
 from pyspark.sql.session import SparkSession
 from pyspark.sql.dataframe import DataFrame
 
@@ -61,16 +63,17 @@ def time_complexity3(
 
             times.append(end)
 
-        axs[i].plot(times)
-        axs[i].set_title(f"{plot_title} (input size: {max_size})")
-        axs[i].set_xlabel("Input size")
-        axs[i].set_ylabel("Time")
+        ax: Axes = axs[i]
+        ax.plot(times)
+        ax.set_title(f"{plot_title} (input size: {max_size})")
+        ax.set_xlabel("Input size")
+        ax.set_ylabel("Time")
 
     plt.tight_layout()
     plt.show()
 
 def time_complexity3_spark(
-        # function,
+        function,
         populate_fn,
         spark: SparkSession,
         plot_title: str,
@@ -78,27 +81,26 @@ def time_complexity3_spark(
         max_input_step = 1000
     ) -> None:
     sizes = [max_input_size + (max_input_step * i) for i in range(3)]
+
     _, axs = plt.subplots(1, 3, figsize=(15, 5))
 
     for i, max_size in enumerate(sizes):
         times = []
 
         for size in range(1, max_size + 1):
-            geojson = populate_fn(size)
-            df: DataFrame = spark.createDataFrame(geojson['coordinates'])
-            print(df)
+            gdf: DataFrame = populate_fn(size, spark)
 
-            # TODO: Measure time complexity of distance function
             start = timeit.default_timer()
-            # TODO:
+            gdf = gdf.withColumn('distance', function(F.col('coordinates')))
             end = timeit.default_timer() - start
 
             times.append(end)
 
-        axs[i].plot(times)
-        axs[i].set_title(f"{plot_title} (input size: {max_size})")
-        axs[i].set_xlabel("Input size")
-        axs[i].set_ylabel("Time")
+        ax: Axes = axs[i]
+        ax.plot(times)
+        ax.set_title(f"{plot_title} (input size: {max_size})")
+        ax.set_xlabel("Input size")
+        ax.set_ylabel("Time")
 
     plt.tight_layout()
     plt.show()
