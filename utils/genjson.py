@@ -5,8 +5,8 @@
 import json
 import random
 
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, ArrayType, FloatType, DoubleType
+from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType, DoubleType
 
 def test():
     print("Testing genjson...")
@@ -38,8 +38,19 @@ def basic_mlstr(
 
     return json.loads(gjson_str)
 
-def dataframe(n: int):
-    spark = SparkSession.builder.appName("GeoJSONDataFrame").getOrCreate()
+def dataframe(
+        n: int,
+        spark: SparkSession
+    ) -> DataFrame:
+    """
+    Generate 2 GeoJSON trajectories as DataFrame.
+
+    :param n: The number of point pairs that will be created. A trajectory
+    consists of pair of points, if `n` is set to `3`, this trajectory will
+    have 3 points (x, y), i.e.: 6 elements in total.
+    :param spark: A spark session already intialized.
+    :return: The GeoJSON generated as a DataFrame.
+    """
     coords_type = ArrayType(ArrayType(ArrayType(DoubleType(), True), True), True)
     schema = StructType([
         StructField('coordinates', coords_type, True),
