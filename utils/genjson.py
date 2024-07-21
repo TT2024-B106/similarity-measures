@@ -8,9 +8,6 @@ import random
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.types import StructType, StructField, StringType, ArrayType, DoubleType
 
-def test():
-    print("Testing genjson...")
-
 def _create_coords(n: int) -> list[float]:
     arr = []
 
