@@ -79,7 +79,6 @@ def time_complexity3_spark(
         plot_title: str,
         max_input_size = 1000,
         max_input_step = 1000,
-        collect = False
     ) -> None:
     sizes = [max_input_size + (max_input_step * i) for i in range(3)]
 
@@ -93,7 +92,6 @@ def time_complexity3_spark(
 
             start = timeit.default_timer()
             gdf = gdf.withColumn('distance', function(F.col('coordinates')))
-            if collect: gdf.collect()
             end = timeit.default_timer() - start
 
             times.append(end)
