@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 import mplcursors
-from collections import defaultdict
 
 # Cargar la biblioteca C++
 cppyy.load_library('../build/libeuclidean.so')
