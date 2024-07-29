@@ -3,7 +3,7 @@ import cppyy
 import time
 import matplotlib.pyplot as plt
 import random
-import np
+import numpy as np
 import mplcursors
 from collections import defaultdict
 
