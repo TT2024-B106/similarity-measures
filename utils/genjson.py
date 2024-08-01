@@ -4,6 +4,8 @@
 
 import json
 import random
+import uuid
+import os
 
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.types import StructType, StructField, StringType, ArrayType, DoubleType
@@ -34,6 +36,48 @@ def basic_mlstr(
     gjson_str = '{' + gjson_str + '}'
 
     return json.loads(gjson_str)
+
+def file(
+        n: int,
+        dir: str = "/tmp"
+    ) -> str:
+    """
+    Generate file with given number of pair points.
+
+    :param n: The number of pair of coordinates to be generated.
+    :param dir: The directory where the file will be stored.
+        Defaults to '/tmp'.
+    :return: The file path where it was generated.
+    """
+    # Setting GeoJSON info
+    gjson_str = '"type": "FeatureCollection","features":'
+    features = '"type":"Feature","properties":'
+    f_props = '"name":"7","tiempo":"2020-01-01 00:00:00 a 2020-01-01 23:59:59"'
+    f_geom = '"type":"LineString","coordinates":'
+    coords = ""
+
+    # Generating coordinates
+    for i in range(n):
+        coords += f'{str(_create_coords(1))}'
+
+        if i < n - 1:
+            coords += ','
+
+    # Building string JSON with generated data
+    coords = '[' + coords + ']'
+    f_geom = '{' + f_geom + coords + '}'
+    f_props = '{' + f_props + '}, "geometry":' + f_geom
+    features = '[{' + features + f_props + '}]'
+    gjson_str = '{' + gjson_str + features + '}'
+
+    # Saving file
+    file_name = f"{uuid.uuid4()}_{str(n)}.json"
+    file_path = os.path.join(dir, file_name)
+
+    with open(file_path, "w") as file:
+        file.write(gjson_str)
+
+    return file_path
 
 def dataframe(
         n: int,
