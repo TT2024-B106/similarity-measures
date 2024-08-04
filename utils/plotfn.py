@@ -111,6 +111,8 @@ def time_complexity(
     """
     max_input_size = kwargs.get('max_input_size', 1000)
     min_input_size = kwargs.get('min_input_size', 1)
+    xlabel = kwargs.get('xlabel', "Input size")
+    ylabel = kwargs.get('ylabel', "Execution time (s)")
 
     times = []
     min_max_range = range(min_input_size, max_input_size + 1)
@@ -126,9 +128,8 @@ def time_complexity(
 
     if 'title' in kwargs:
         plt.title(kwargs['title'])
-    if 'xlabel' in kwargs:
-        plt.xlabel(kwargs['xlabel'])
-    if 'ylabel' in kwargs:
-        plt.ylabel(kwargs['ylabel'])
+
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
 
     plt.show()
