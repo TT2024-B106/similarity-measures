@@ -11,13 +11,7 @@ import pyspark.sql.functions as F
 from matplotlib.axes import Axes
 from pyspark.sql.session import SparkSession
 from pyspark.sql.dataframe import DataFrame
-
-# from collections.abc import Callable
-# from typing_extensions import ParamSpec
-#
-# _P = ParamSpec('_P')
-# _R = TypeVar('_R')
-# _T = TypeVar('_T')
+from typing import Callable, Any
 
 def time_complexity3(
         # function: Callable[_P, _R],
@@ -103,4 +97,38 @@ def time_complexity3_spark(
         ax.set_ylabel("Time")
 
     plt.tight_layout()
+    plt.show()
+
+def time_complexity(
+        function: Callable,
+        *args: Any,
+        **kwargs: Any
+    ) -> None:
+    """
+    Plot the time complexity of a given function.
+
+    :param function [Callable]: The function to analyze.
+    """
+    max_input_size = kwargs.get('max_input_size', 1000)
+    min_input_size = kwargs.get('min_input_size', 1)
+
+    times = []
+    min_max_range = range(min_input_size, max_input_size + 1)
+
+    for i in min_max_range:
+        time = function(i, *args)
+        times.append(time)
+
+    if 'convert_seconds' in kwargs:
+        times = [t / kwargs['convert_seconds'] for t in times]
+
+    plt.plot(min_max_range, times)
+
+    if 'title' in kwargs:
+        plt.title(kwargs['title'])
+    if 'xlabel' in kwargs:
+        plt.xlabel(kwargs['xlabel'])
+    if 'ylabel' in kwargs:
+        plt.ylabel(kwargs['ylabel'])
+
     plt.show()
