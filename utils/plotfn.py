@@ -66,6 +66,40 @@ def time_complexity3(
     plt.tight_layout()
     plt.show()
 
+def time_complexity(
+        function: Callable,
+        *args: Any,
+        **kwargs: Any
+    ) -> None:
+    """
+    Plot the time complexity of a given function.
+
+    :param function [Callable]: The function to analyze.
+    """
+    max_input_size = kwargs.get('max_input_size', 1000)
+    min_input_size = kwargs.get('min_input_size', 1)
+    xlabel = kwargs.get('xlabel', "Input size")
+    ylabel = kwargs.get('ylabel', "Execution time (s)")
+
+    times = []
+    min_max_range = range(min_input_size, max_input_size + 1)
+
+    for i in min_max_range:
+        time = function(i, *args)
+        times.append(time)
+
+    if 'convert_seconds' in kwargs:
+        times = [t / kwargs['convert_seconds'] for t in times]
+
+    plt.plot(min_max_range, times)
+
+    if 'title' in kwargs:
+        plt.title(kwargs['title'])
+
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+
+    plt.show()
 def plot_time_vs_step_size(file_path, upper_bound, step_size):
     """Plots the time it takes to load n coordinates from a JSON file for increasing values of n.
 
