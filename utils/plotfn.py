@@ -6,19 +6,18 @@ calculations functions.
 
 import timeit
 import matplotlib.pyplot as plt
+import pyspark.sql.functions as F
 
-# from collections.abc import Callable
-# from typing_extensions import ParamSpec
-#
-# _P = ParamSpec('_P')
-# _R = TypeVar('_R')
-# _T = TypeVar('_T')
+from matplotlib.axes import Axes
+from pyspark.sql.session import SparkSession
+from pyspark.sql.dataframe import DataFrame
+from typing import Callable, Any
 
 def time_complexity3(
         # function: Callable[_P, _R],
-        function: any,
+        function,
         # populate_fn: Callable[_P, _R],
-        populate_fn: any,
+        populate_fn,
         plot_title: str,
         max_input_size_step: int | None = None,
         max_input_size_2: int | None = None,
@@ -42,7 +41,7 @@ def time_complexity3(
     else:
         sizes = [max_input_size + (max_input_size_step * i) for i in range(3)]
 
-    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    _, axs = plt.subplots(1, 3, figsize=(15, 5))
 
     for i, max_size in enumerate(sizes):
         times = []
@@ -58,10 +57,44 @@ def time_complexity3(
 
             times.append(end)
 
-        axs[i].plot(times)
-        axs[i].set_title(f"{plot_title} (input size: {max_size})")
-        axs[i].set_xlabel("Input size")
-        axs[i].set_ylabel("Time")
+        ax: Axes = axs[i]
+        ax.plot(times)
+        ax.set_title(f"{plot_title} (input size: {max_size})")
+        ax.set_xlabel("Input size")
+        ax.set_ylabel("Time")
+
+    plt.tight_layout()
+    plt.show()
+
+def time_complexity3_spark(
+        function,
+        populate_fn,
+        spark: SparkSession,
+        plot_title: str,
+        max_input_size = 1000,
+        max_input_step = 1000,
+    ) -> None:
+    sizes = [max_input_size + (max_input_step * i) for i in range(3)]
+
+    _, axs = plt.subplots(1, 3, figsize=(15, 5))
+
+    for i, max_size in enumerate(sizes):
+        times = []
+
+        for size in range(1, max_size + 1):
+            gdf: DataFrame = populate_fn(size, spark)
+
+            start = timeit.default_timer()
+            gdf = gdf.withColumn('distance', function(F.col('coordinates')))
+            end = timeit.default_timer() - start
+
+            times.append(end)
+
+        ax: Axes = axs[i]
+        ax.plot(times)
+        ax.set_title(f"{plot_title} (input size: {max_size})")
+        ax.set_xlabel("Input size")
+        ax.set_ylabel("Time")
 
     plt.tight_layout()
     plt.show()
@@ -100,6 +133,7 @@ def time_complexity(
     plt.ylabel(ylabel)
 
     plt.show()
+
 def plot_time_vs_step_size(file_path, upper_bound, step_size):
     """Plots the time it takes to load n coordinates from a JSON file for increasing values of n.
 
