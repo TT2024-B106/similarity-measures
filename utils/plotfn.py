@@ -133,29 +133,6 @@ def time_complexity(
     plt.ylabel(ylabel)
 
     plt.show()
-
-def plot_time_vs_step_size(file_path, upper_bound, step_size):
-    """Plots the time it takes to load n coordinates from a JSON file for increasing values of n.
-
-    Args:
-        file_path (str): The path to the JSON file.
-        upper_bound (int): The maximum number of coordinates to load.
-        step_size (int): The increment between each measurement.
-    """
-
-    n_values = range(step_size, upper_bound + 1, step_size)
-    times = []
-
-    for n in n_values:
-        _, elapsed_time = load_n_coordinates_from_json_file(file_path, n)
-        times.append(elapsed_time)
-
-    plt.plot(n_values, times)
-    plt.xlabel("Number of Coordinates (n)")
-    plt.ylabel("Time (seconds)")
-    plt.title("Time Loading " + str(upper_bound) + " Coordinates")
-    plt.grid(True)
-    plt.show()
     
 def test():
     print("Testing")
