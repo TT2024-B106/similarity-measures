@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "euclidean.h"
+#include "./Headers/euclidean.h"
 
 double distance(const std::vector<double>& p,
 		const std::vector<double>& q)
