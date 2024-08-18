@@ -16,6 +16,14 @@ test-edr: libeditdist.so libmanhattan.so
 
 	./$@.out -d
 
+test-dtw: libdtw.so
+	mkdir -p build
+	mv libdtw.so build/
+	$(CC) tests/test_dtw.cpp $(BFLAGS) -ldtw $(RPATH) -o $@.out
+
+	./$@.out -d
+
+
 ctypes:
 	$(CC) $(CFLAGS) $(LDFLAGS) -o libeuclidean.so src/euclidean.cpp
 
@@ -30,6 +38,9 @@ libmanhattan.so:
 libeditdist.so:
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ src/edit_distance.cpp
 
+libdtw.so:
+	$(CC) $(CFLAGS) $(LDFLAGS) $(RPATH) -o $@ src/DTW.cpp src/Algoritmo.cpp
+	
 clean:
 	rm -f ./*.so
 	rm -f ./*.out
