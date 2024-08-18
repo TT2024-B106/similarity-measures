@@ -133,6 +133,4 @@ def time_complexity(
     plt.ylabel(ylabel)
 
     plt.show()
-    
-def test():
-    print("Testing")
+
