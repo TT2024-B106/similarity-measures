@@ -1,7 +1,7 @@
 use std::env;
 use std::f64;
 use std::fs::File;
-use std::time::{Instant, Duration};
+use std::time::Instant;
 use std::io::Write;
 
 fn distance(p: Vec<f64>, q: Vec<f64>) -> Result<f64, String> {
@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    let mut durations: Vec<Duration> = Vec::new();
+    let mut durations: Vec<f64> = Vec::new();
 
     for i in 1..=n {
         let p = vec![1.0; i];
@@ -45,7 +45,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             Ok(_) => { }, // Do nothing on success
             Err(e) => println!("Error: {}", e),
         }
-        durations.push(start.elapsed());
+        durations.push(start.elapsed().as_secs_f64());
     }
 
     let mut file = File::create("durations.txt")?;
