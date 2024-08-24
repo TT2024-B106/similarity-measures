@@ -1,4 +1,4 @@
-#include "Headers/Algoritmos.h"
+#include "Algoritmos.h"
 #include <cmath>  
 
 Algoritmo::~Algoritmo() {}
