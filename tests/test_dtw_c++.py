@@ -1,3 +1,4 @@
+# Existing imports and setup code
 import json
 import cppyy
 import time
@@ -7,6 +8,7 @@ import numpy as np
 import mplcursors
 from collections import defaultdict
 
+# Load shared libraries and include headers
 cppyy.load_library('../build/libdtw.so')
 cppyy.include('../src/Headers/DTW.h')
 cppyy.include('../src/Headers/Algoritmos.h')
@@ -78,7 +80,8 @@ def main():
     plt.plot(sorted_coords, avg_times, label='Average Execution Time (C++)')
     plt.xlabel('Number of Coordinates')
     plt.ylabel('Time (seconds)')
-    plt.title('Average Execution Time vs Number of Coordinates (C++)')
+    # Updated title to include overall average execution time
+    plt.title(f'Average Execution Time vs Number of Coordinates (C++)\nOverall Average Time: {overall_avg_time_cpp:.6f} seconds')
     plt.legend()
     plt.tight_layout()
     mplcursors.cursor(hover=True)
