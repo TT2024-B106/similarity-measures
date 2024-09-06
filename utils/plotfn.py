@@ -14,14 +14,10 @@ from pyspark.sql.dataframe import DataFrame
 from typing import Callable, Any
 
 def time_complexity3(
-        # function: Callable[_P, _R],
-        function,
-        # populate_fn: Callable[_P, _R],
-        populate_fn,
+        function: Callable,
+        populate_fn: Callable,
         plot_title: str,
-        max_input_size_step: int | None = None,
-        max_input_size_2: int | None = None,
-        max_input_size_3: int | None = None,
+        max_input_size_step = 1000,
         max_input_size = 1000
     ) -> None:
     """
@@ -32,14 +28,18 @@ def time_complexity3(
     This function is designed for plotting the time complexity of a function
     that calculates the distance between 2 trajectories.
 
-    :param function [TODO:type]: [TODO:description]
-    :param max_input_size [TODO:type]: [TODO:description]
-    :return: [TODO:description]
+    :param function Callable: The function that calculates the distance
+    between 2 trajectories.
+    :param populate_fn Callable: The function that generates trajectories.
+    :param plot_title str: The plot title that will be displayed in the 3
+    subplots along with the maximum input size.
+    :param max_input_size_step int: The maximum input step that will increase
+    each subplot, i.e.: If this is set to `1000`, the second subplot will
+    increase `+1000` and the third subplot will increase to `+2000`.
+    :param max_input_size int: The maximum input size that
+    `max_input_size_step` will take as base.
     """
-    if max_input_size_step is None:
-        sizes = [max_input_size + (1000 * i) for i in range(3)]
-    else:
-        sizes = [max_input_size + (max_input_size_step * i) for i in range(3)]
+    sizes = [max_input_size + (max_input_size_step * i) for i in range(3)]
 
     _, axs = plt.subplots(1, 3, figsize=(15, 5))
 
@@ -133,3 +133,4 @@ def time_complexity(
     plt.ylabel(ylabel)
 
     plt.show()
+
