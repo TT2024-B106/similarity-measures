@@ -43,7 +43,7 @@ def main():
             sequence2 = load_sequence(index_to_compare_with, data)
 
             start_execute_time = time.time()
-            result = dtw_module.calculate_dtw(sequence_to_compare, sequence2)  # Llamada a la función de Cython
+            dtw_module.calculate_dtw(sequence_to_compare, sequence2)  # Llamada a la función de Cython
             end_execute_time = time.time()
 
             execute_time = end_execute_time - start_execute_time
