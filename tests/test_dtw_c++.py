@@ -60,7 +60,7 @@ def main():
             sequence2 = load_sequence(index_to_compare_with, data)
 
             start_execute_time = time.time()
-            result = strategy.Execute(sequence_to_compare, sequence2)
+            strategy.Execute(sequence_to_compare, sequence2)
             end_execute_time = time.time()
 
             execute_time = end_execute_time - start_execute_time
