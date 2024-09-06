@@ -10,9 +10,9 @@ from collections import defaultdict
 
 # Load shared libraries and include headers
 cppyy.load_library('../build/libdtw.so')
-cppyy.include('../src/Headers/DTW.h')
-cppyy.include('../src/Headers/Algoritmos.h')
-cppyy.include('../src/Headers/Coordinates.h')
+cppyy.include('../src/DTW.h')
+cppyy.include('../src/Algoritmos.h')
+cppyy.include('../src/Coordinates.h')
 
 lib = cppyy.gbl
 DTW = lib.DTW
