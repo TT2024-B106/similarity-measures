@@ -1,7 +1,10 @@
 import json
+import random
+import timeit
 import stmeasures
 import geojsonio
 import shapely
+import matplotlib.pyplot as plt
 
 def see_each_trajectory(geojson, start, end):
     for i in range(start, end):
@@ -88,3 +91,53 @@ def frechet_distance(a, b):
 def read_file(file_path):
     with open(file_path) as f:
         return json.load(f)
+
+def populate_linestring(n: int) -> shapely.LineString:
+    arr = []
+
+    for _ in range(n):
+        arr.append([random.uniform(-99.0, -99.5), random.uniform(19.3, 19.5)])
+
+    return shapely.LineString(arr)
+
+def populate_trajectory(n: int) -> list[tuple[float, float]]:
+    return [
+        (random.uniform(19.0, 19.5), random.uniform(-99.0, -99.5))
+        for _ in range(n)
+    ]
+
+def plot_timecomplexity_shapely_vs_stmeasures(
+        shapelyfn,
+        stmeasuresfn,
+        maxsize: int,
+        *args
+    ):
+    params = [
+        (shapelyfn, populate_linestring, "Shapely"),
+        (stmeasuresfn, populate_trajectory, "stmeasures")
+    ]
+
+    _, axs = plt.subplots(1, 2, figsize=(20, 10))
+
+    for ax, (fn, populatefn, plottitle) in zip(axs, params):
+        times = []
+        for i in range(2, maxsize):
+            t1 = populatefn(i)
+            t2 = populatefn(i)
+
+            start = timeit.default_timer()
+            if plottitle == "stmeasures":
+                fn(t1, t2, *args)
+            else:
+                fn(t1, t2)
+            end = timeit.default_timer() - start
+
+            times.append(end)
+
+        ax.plot(times)
+        ax.set_title(plottitle)
+        ax.set_xlabel("Tamaño de datos de entrada")
+        ax.set_ylabel("Tiempo de ejecución")
+
+    plt.tight_layout()
+    plt.show()
