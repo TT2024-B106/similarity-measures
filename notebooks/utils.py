@@ -4,6 +4,7 @@ import timeit
 import stmeasures
 import geojsonio
 import shapely
+import numpy as np
 import matplotlib.pyplot as plt
 
 def see_each_trajectory(geojson, start, end):
@@ -44,13 +45,8 @@ def calculate_all(t1, t2, convert=False, visualize=True):
     try: ers = stmeasures.distance(t1, t2, stmeasures.Algorithms.ERS)
     except: print(f"Algoritmo ERS no pudo ser calculado\n")
 
-    try: hausdorff_distance
-    except NameError: _
-    else: hausdorff = hausdorff_distance(t1, t2)
-
-    try: frechet_distance
-    except NameError: _
-    else: frechet = frechet_distance(t1, t2)
+    hausdorff = hausdorff_distance(t1, t2)
+    frechet = frechet_distance(t1, t2)
 
     if euclidean > 0: print(f"Distancia Euclideana: {euclidean}")
     if hausdorff > 0: print(f"Distancia Hausdorff: {hausdorff}")
@@ -141,3 +137,62 @@ def plot_timecomplexity_shapely_vs_stmeasures(
 
     plt.tight_layout()
     plt.show()
+
+def get_only_trajectories(geojson, n):
+    i = 0
+    dataset = []
+    len_geojson = len(geojson)
+    
+    while len(dataset) < n:
+        if i >= len_geojson or n >= len_geojson:
+            raise ValueError("Number of trajectories greater than dataset length")
+        
+        if len(geojson[i]) > 1:
+            dataset.append(geojson[i])
+        
+        i += 1
+
+    return dataset
+
+def compute_distance_matrix(trajectories, distance_function, *args):
+    """
+    Computes a pairwise distance matrix for a list of trajectories.
+
+    :param trajectories: List of trajectories, where each trajectory is a list of (x, y) coordinates.
+    :param distance_function: The distance function to use (e.g., hausdorff, dtw).
+    :return: A 2D numpy array representing the distance matrix.
+    """
+    n = len(trajectories)
+    distance_matrix = np.zeros((n, n))
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            distance = distance_function(trajectories[i], trajectories[j], *args)
+            distance_matrix[i, j] = distance
+            distance_matrix[j, i] = distance  # Symmetric matrix
+
+    return distance_matrix
+
+def plot_clusters(trajectories, labels, plottitle="Trajectory Clustering"):
+    unique_labels = set(labels)
+    colors = plt.cm.tab10(np.linspace(0, 1, len(unique_labels)))
+
+    for trajectory, label in zip(trajectories, labels):
+        color = colors[label] if label >= 0 else "k"  # Black for noise
+        x, y = zip(*trajectory)
+        plt.plot(x, y, color=color)
+
+    plt.title(plottitle)
+    plt.show()
+
+def euclidean_distance1(a, b):
+    return stmeasures.euclidean_distance(*convert_to_same_size(a, b))
+
+def euclidean_distance2(a, b):
+    return shapely.distance(*to_shapely(a, b))
+
+def hausdorff_distance(a, b):
+    return shapely.hausdorff_distance(*to_shapely(a, b))
+
+def frechet_distance(a, b):
+    return shapely.frechet_distance(*to_shapely(a, b))
