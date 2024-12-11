@@ -78,12 +78,6 @@ def to_shapely(a, b):
     
     return l1, l2
 
-def hausdorff_distance(a, b):
-    return float(shapely.hausdorff_distance(*to_shapely(a, b)))
-
-def frechet_distance(a, b):
-    return float(shapely.frechet_distance(*to_shapely(a, b)))
-
 def read_file(file_path):
     with open(file_path) as f:
         return json.load(f)
@@ -187,12 +181,3 @@ def plot_clusters(trajectories, labels, plottitle="Trajectory Clustering"):
 
 def euclidean_distance1(a, b):
     return stmeasures.euclidean_distance(*convert_to_same_size(a, b))
-
-def euclidean_distance2(a, b):
-    return shapely.distance(*to_shapely(a, b))
-
-def hausdorff_distance(a, b):
-    return shapely.hausdorff_distance(*to_shapely(a, b))
-
-def frechet_distance(a, b):
-    return shapely.frechet_distance(*to_shapely(a, b))
